@@ -10,7 +10,7 @@ class Theater:
     """
 
 
-    def __init__(self, width, height, tempo=120, color=(0, 0, 0)):
+    def __init__(self, width, height, tempo=120, color=(0, 0, 0), midi=None):
         """
         Class constructor
         :param width: width of theater window in pixels
@@ -39,15 +39,22 @@ class Theater:
         self._next_tick = 0
         self._current_step = 0;
 
+        # Starts MIDI communication
+        self._midi = midi
+
     def _loop(self):
         # Theater main loop
 
         # This flag is used to keep main loop running
         while self.running:
 
+            # Check if there is MIDI input
+            self._midi.get_messages()
+
             # Typical pygame event, controls end of program when closing window
             for event in pygame.event.get():
                 if event.type == QUIT:
+                    self._midi.close()
                     pygame.quit()
                     sys.exit()
 
