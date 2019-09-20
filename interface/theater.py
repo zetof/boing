@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import QUIT
 import sys
+from .lpd8 import LPD8_Events
 
 class Theater:
     """
@@ -57,6 +58,14 @@ class Theater:
                     self._midi.close()
                     pygame.quit()
                     sys.exit()
+                if event.type == LPD8_Events.LPD8_PGM_CHG:
+                    print('*** PGM_CHG *** PGM: ' + str(event.pgm) + ' BANK: ' + str(event.bank))
+                if event.type == LPD8_Events.LPD8_CTRL:
+                    print('*** CTRL *** PGM: ' + str(event.pgm) + ' BANK: ' + str(event.bank)  + ' CTRL: ' + str(event.ctrl) + ' VALUE: ' +  str(event.value))
+                if event.type == LPD8_Events.LPD8_NOTE_ON:
+                    print('*** NOTE_ON *** PGM: ' + str(event.pgm) + ' BANK: ' + str(event.bank)  + ' NOTE: ' + str(event.note) + ' VELOCITY: ' +  str(event.velocity))
+                if event.type == LPD8_Events.LPD8_NOTE_OFF:
+                    print('*** NOTE_OFF *** PGM: ' + str(event.pgm) + ' BANK: ' + str(event.bank)  + ' NOTE: ' + str(event.note))
 
             # When it is time to perform an action
             if self._tick():

@@ -1,10 +1,8 @@
-from interface.midi import Midi
+from interface.lpd8 import LPD8
 from interface.theater import Theater
 from interface.stage import Stage
 from helpers.instrument import Instrument
 from helpers.scale import Scale
-
-from interface.midi import Midi
 
 THEATER_WIDTH = 400     # Width of main window in pixels
 THEATER_HEIGHT = 400    # Height of main window in pixels
@@ -14,7 +12,7 @@ OSC_URL = '127.0.0.1'   # IP address where to send OSC messages
 OSC_PORT = 57120        # Port where to send OSC messages
 
 # Starts a LPD8 as MIDI device
-lpd8 = Midi()
+lpd8 = LPD8()
 
 # Prepare the main window, also called the theater
 theater = Theater(THEATER_WIDTH, THEATER_HEIGHT, TEMPO * (STAGE_SIZE - 1), midi=lpd8)
